@@ -93,7 +93,7 @@ Install Apk          |  Open Apk
 :-------------------------:|:-------------------------:
 ![install](https://github.com/ascaryaaa/expo-cicd/assets/73589875/442fc96f-c2b3-478f-98a7-d7b9ffa1fe2c)  |  ![working](https://github.com/ascaryaaa/expo-cicd/assets/73589875/5a3558ac-1be5-4331-97b7-6bfbce68e746) | width=100
 
-# Gihub Actions
+# Github Actions
 
 1. Create workflows
 
