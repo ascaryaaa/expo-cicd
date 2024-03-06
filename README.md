@@ -95,11 +95,11 @@ Install Apk          |  Open Apk
 
 # Github Actions
 
-1. Create workflows
+### 1. Create workflows
 
 Create a file path named `.github/workflows/update.yml` at the root of your project.
 
-2. Inside update.yml, copy and paste the following snippet:
+### 2. Inside update.yml, copy and paste the following snippet:
 
 ```
 name: update
@@ -140,7 +140,7 @@ jobs:
 
 ```
 
-3. Change yarn to npm
+### 3. Change yarn to npm
 
 Because im using npm, i change the `yarn` to `npm`
 
@@ -183,7 +183,7 @@ jobs:
 
 ```
 
-4. Access Token
+### 4. Access Token
 
 - Go to Expo.dev
 - Navigate to `Access Token`
@@ -195,11 +195,12 @@ jobs:
 
 ![image](https://github.com/ascaryaaa/expo-cicd/assets/73589875/9d40438c-2b88-4231-be85-8bac0bae7ee7)
 
-5. Add Token to Github
+### 5. Add Token to Github
 
 - Go to repository.
 - Navigate to `settings > Settings and Variables > Actions>Repository Sercrets`
 - Add token
+
 ![image](https://github.com/ascaryaaa/expo-cicd/assets/73589875/d812bc7f-ba6d-4e33-9c0d-44fa6674a959)
 
 Make sure the token name is the same in the `update.yml`
@@ -212,3 +213,9 @@ Make sure the token name is the same in the `update.yml`
           token: ${{ secrets.EXPO_TOKEN }}
 
 ```
+
+### 6. Check Actions
+
+Navigate to `Actions` and check the status
+
+![image](https://github.com/ascaryaaa/expo-cicd/assets/73589875/83a9ea0f-9a86-4db4-afca-a3fd1a25a660)
