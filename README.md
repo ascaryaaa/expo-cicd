@@ -93,3 +93,122 @@ Install Apk          |  Open Apk
 :-------------------------:|:-------------------------:
 ![install](https://github.com/ascaryaaa/expo-cicd/assets/73589875/442fc96f-c2b3-478f-98a7-d7b9ffa1fe2c)  |  ![working](https://github.com/ascaryaaa/expo-cicd/assets/73589875/5a3558ac-1be5-4331-97b7-6bfbce68e746) | width=100
 
+# Gihub Actions
+
+1. Create workflows
+
+Create a file path named `.github/workflows/update.yml` at the root of your project.
+
+2. Inside update.yml, copy and paste the following snippet:
+
+```
+name: update
+on: push
+
+jobs:
+  update:
+    name: EAS Update
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check for EXPO_TOKEN
+        run: |
+          if [ -z "${{ secrets.EXPO_TOKEN }}" ]; then
+            echo "You must provide an EXPO_TOKEN secret linked to this project's Expo account in this repo's secrets. Learn more: https://docs.expo.dev/eas-update/github-actions"
+            exit 1
+          fi
+
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+          cache: yarn
+
+      - name: Setup EAS
+        uses: expo/expo-github-action@v8
+        with:
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Publish update
+        run: eas update --auto
+
+```
+
+3. Change yarn to npm
+
+Because im using npm, i change the `yarn` to `npm`
+
+```
+name: update
+on: push
+
+jobs:
+  update:
+    name: EAS Update
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check for EXPO_TOKEN
+        run: |
+          if [ -z "${{ secrets.EXPO_TOKEN }}" ]; then
+            echo "You must provide an EXPO_TOKEN secret linked to this project's Expo account in this repo's secrets. Learn more: https://docs.expo.dev/eas-update/github-actions"
+            exit 1
+          fi
+
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+          cache: npm
+
+      - name: Setup EAS
+        uses: expo/expo-github-action@v8
+        with:
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Publish update
+        run: eas update --auto
+
+```
+
+4. Access Token
+
+- Go to Expo.dev
+- Navigate to `Access Token`
+- Then create token
+
+![image](https://github.com/ascaryaaa/expo-cicd/assets/73589875/d68a2de5-c7f5-4c17-afbb-f51ff7800c3f)
+
+- Copy the token
+
+![image](https://github.com/ascaryaaa/expo-cicd/assets/73589875/9d40438c-2b88-4231-be85-8bac0bae7ee7)
+
+5. Add Token to Github
+
+- Go to repository.
+- Navigate to `settings > Settings and Variables > Actions>Repository Sercrets`
+- Add token
+![image](https://github.com/ascaryaaa/expo-cicd/assets/73589875/d812bc7f-ba6d-4e33-9c0d-44fa6674a959)
+
+Make sure the token name is the same in the `update.yml`
+
+```
+      - name: Setup EAS
+        uses: expo/expo-github-action@v8
+        with:
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
+
+```
